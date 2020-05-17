@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Microfrontend</title>
+    
+    <meta name="importmap-type" content="systemjs-importmap">
+    
+    <script type="systemjs-importmap" src="/importmap.json"></script>
+
+    <% if (process.env.NODE_ENV === 'development') { %>
+    <script type="systemjs-importmap" src="/local-importmap.json"></script>
+    <% } %>
+
+    <script src="https://unpkg.com/import-map-overrides@1.7.2/dist/import-map-overrides.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/system.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/amd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/named-exports.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/named-register.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/use-default.min.js"></script>
+  </head>
+
+  <body>
+    <script>
+      System.import('orchestrator');
+    </script>
+    <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+  </body>
+
+  <style type="text/css">
+    .snackbar-container {
+      transition: all 500ms ease;
+      transition-property: top, right, bottom, left, opacity;
+      font-family: Roboto, sans-serif;
+      font-size: 14px;
+      min-height: 14px;
+      background-color: #070b0e;
+      position: fixed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      line-height: 22px;
+      padding: 18px 24px;
+      bottom: -100px;
+      top: -100px;
+      opacity: 0;
+      z-index: 9999;
+    }
+    .snackbar-container .action {
+        background: inherit;
+        display: inline-block;
+        border: none;
+        font-size: inherit;
+        text-transform: uppercase;
+        color: #4caf50;
+        margin: 0 0 0 24px;
+        padding: 0;
+        min-width: min-content;
+        cursor: pointer;
+    }
+    .snackbar-pos.bottom-left {
+      top: auto !important;
+      bottom: 0;
+      left: 0;
+    }
+    @media (min-width: 640px) {
+      .snackbar-container {
+        min-width: 288px;
+        max-width: 568px;
+        display: inline-flex;
+        border-radius: 2px;
+        margin: 24px;
+      }
+    }
+    @media (max-width: 640px) {
+      .snackbar-container {
+        left: 0;
+        right: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</html>
+
